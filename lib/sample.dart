@@ -21,7 +21,7 @@ class _SampleState extends State<Sample> with WidgetsBindingObserver {
   }
 
   @override
-  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+  void didChangeAppLifecycleState(AppLifecycleState state) {
     debugPrint("State -> ${state.name}");
     if (state == AppLifecycleState.detached) {
       for (var i = 0; i < 100; i++) {
