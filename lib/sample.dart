@@ -24,22 +24,35 @@ class _SampleState extends State<Sample> with WidgetsBindingObserver {
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
     debugPrint("State -> ${state.name}");
     if (state == AppLifecycleState.detached) {
-      for (var i = 0; i < 1000; i++) {
+      for (var i = 0; i < 100; i++) {
         debugPrint("closing $i");
       }
-
+      A.test();
       debugPrint("App closing");
     }
     super.didChangeAppLifecycleState(state);
   }
-
-  int i = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.sailing),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    appBar: AppBar(backgroundColor: Colors.blueGrey),
+                  ),
+                ),
+              );
+            },
+          )
+        ],
       ),
     );
   }
@@ -50,7 +63,7 @@ class A {
 
   A(this.s);
 
-  void test() {
-    debugPrint("tes");
+  static test() {
+    debugPrint("test ");
   }
 }
