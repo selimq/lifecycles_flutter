@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 class Sample extends StatefulWidget {
@@ -24,10 +25,16 @@ class _SampleState extends State<Sample> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     debugPrint("State -> ${state.name}");
     if (state == AppLifecycleState.detached) {
-      for (var i = 0; i < 100; i++) {
+      for (var i = 0; i < 1000; i++) {
         debugPrint("closing $i");
-      }
-      A.test();
+      } 
+
+      // async func doesn't work
+      Connectivity().checkConnectivity().then((value) {
+        print(value);
+      });
+
+    
       debugPrint("App closing");
     }
     super.didChangeAppLifecycleState(state);
@@ -58,12 +65,3 @@ class _SampleState extends State<Sample> with WidgetsBindingObserver {
   }
 }
 
-class A {
-  final String s;
-
-  A(this.s);
-
-  static test() {
-    debugPrint("test ");
-  }
-}

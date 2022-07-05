@@ -11,8 +11,12 @@ import android.os.Bundle
 import android.content.Intent
 import android.app.Service
 import android.os.IBinder
+import java.util.Timer
+import kotlin.concurrent.schedule
 
 class MainActivity: FlutterActivity() {
+    private val TAG = "FlutterActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         intent = Intent(this, MyService::class.java)
@@ -20,11 +24,11 @@ class MainActivity: FlutterActivity() {
     }
     override fun onStop() {
         super.onStop()
-        Log.d("FlutterActivity", "stop")
+        Log.d(TAG, "stop")
     }
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("FlutterActivity", "destroy")
+        Log.d(TAG, "destroy")
     }
     
 }
@@ -47,6 +51,10 @@ class MyService : Service() {
         stopSelf()
     }
     override fun onDestroy() {
+        /*   Timer("SettingUp", false).schedule(5000) { 
+              Log.i(TAG,"onDestroy sch")
+         } */
         Log.i(TAG, "Service onDestroy")
     }
 }
+
